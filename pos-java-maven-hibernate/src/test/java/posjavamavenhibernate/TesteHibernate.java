@@ -119,14 +119,62 @@ public class TesteHibernate {
 	public void testeQueryList() {
 
 		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
-//		List<UsuarioPessoa> lista = daoGeneric.getEntityManager().createQuery("from UsuarioPessoa").getResultList();
-		List<UsuarioPessoa> lista = daoGeneric.getEntityManager().createQuery("from UsuarioPessoa where nome = 'Bruno'")
-				.getResultList();
+		List<UsuarioPessoa> lista = daoGeneric.getEntityManager().createQuery("from UsuarioPessoa").getResultList();
+//		List<UsuarioPessoa> lista = daoGeneric.getEntityManager().createQuery("from UsuarioPessoa where nome = 'Bruno'").getResultList();
 
 		for (UsuarioPessoa usuarioPessoa : lista) {
 			System.out.println("");
 			System.out.println(usuarioPessoa);
 		}
 	}
+	
+	
+	@Test
+	public void testeQueryListOrderByNome() {
+
+		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
+		List<UsuarioPessoa> lista = daoGeneric.getEntityManager().createQuery("from UsuarioPessoa order by nome").getResultList();
+
+		for (UsuarioPessoa usuarioPessoa : lista) {
+			System.out.println("");
+			System.out.println(usuarioPessoa);
+		}
+	}
+	
+	@Test
+	public void testeQueryListOrderByNomeMaxResult() {
+
+		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
+		List<UsuarioPessoa> lista = daoGeneric.getEntityManager().createQuery("from UsuarioPessoa order by nome").setMaxResults(2).getResultList();
+
+		for (UsuarioPessoa usuarioPessoa : lista) {
+			System.out.println("");
+			System.out.println(usuarioPessoa);
+		}
+	}
+	
+	
+	@Test
+	public void testeQueryListParametro() {
+
+		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
+		/* o segundo parâmentro setParameter("nome","Burno") BRUNO, seria o parâmentro que viria da tela*/
+		List<UsuarioPessoa> lista = daoGeneric.getEntityManager().createQuery("from UsuarioPessoa where nome = :nome").setParameter("nome", "Bruno").getResultList();
+
+		for (UsuarioPessoa usuarioPessoa : lista) {
+			System.out.println("");
+			System.out.println(usuarioPessoa);
+		}
+	}
+	
+	@Test
+	public void testeQuerySomaIdade() {
+		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
+		
+		Long somaIdade = (Long) daoGeneric.getEntityManager().createQuery("select sum (u.idade) from UsuarioPessoa u").getSingleResult();
+	
+		System.out.println("Soma de todas as idade é > " + somaIdade);
+	}
+	
 
 }
