@@ -47,7 +47,6 @@ public class UsuarioTelefone {
 	public void setId(Long id) {
 		Id = id;
 	}
-	
 
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
@@ -60,5 +59,13 @@ public class UsuarioTelefone {
 	public void setUsuarioPessoa(UsuarioPessoa usuarioPessoa) {
 		this.usuarioPessoa = usuarioPessoa;
 	}
+
+	@Override
+	public String toString() {
+		return "UsuarioTelefone [Id=" + Id + ", tipo=" + tipo + ", numero=" + numero + ", usuarioPessoa="
+				+ usuarioPessoa + "]";
+	}
+	
+	
 
 }
