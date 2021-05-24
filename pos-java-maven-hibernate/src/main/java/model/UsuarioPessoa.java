@@ -4,8 +4,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 @Entity
+@NamedQueries({
+	
+	@NamedQuery(name="UsuarioPessoa.listarTodos", query = " select u from UsuarioPessoa u "),
+	@NamedQuery(name="UsuarioPessoa.buscarPorNome", query = " select u from UsuarioPessoa u where u.nome = :nome ")
+
+})
 /*
  * Essa anotação @Entity diz para o Hibernate que ele tem que pegar essa classe
  * e gerar uma tabela no banco Dentro do persistence tem que chamar a classe,
@@ -23,6 +31,8 @@ public class UsuarioPessoa {
 	private String login;
 	private String senha;
 	private int idade;
+	
+	
 
 	public int getIdade() {
 		return idade;
