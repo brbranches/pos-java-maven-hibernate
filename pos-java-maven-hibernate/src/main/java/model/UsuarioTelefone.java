@@ -47,6 +47,7 @@ public class UsuarioTelefone {
 	public void setId(Long id) {
 		Id = id;
 	}
+	
 
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
