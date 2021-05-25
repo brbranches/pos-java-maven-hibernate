@@ -208,12 +208,12 @@ public class TesteHibernate {
 	public void testeSalvarTelefone() {
 		DaoGeneric daoGeneric = new DaoGeneric();
 		
-		UsuarioPessoa pessoa = (UsuarioPessoa) daoGeneric.pesquisar(15L, UsuarioPessoa.class);
+		UsuarioPessoa pessoa = (UsuarioPessoa) daoGeneric.pesquisar(14L, UsuarioPessoa.class);
 		
 		UsuarioTelefone telefone = new UsuarioTelefone();
 		
-		telefone.setTipo("Celular");
-		telefone.setNumero("(14) 99844-0565");
+		telefone.setTipo("Fixo");
+		telefone.setNumero("(18) 1234-5678");
 		telefone.setUsuarioPessoa(pessoa);
 		
 		daoGeneric.salvar(telefone);
@@ -229,6 +229,35 @@ public class TesteHibernate {
 		System.out.println(telefone.getUsuarioPessoa().getEmail());
 
 	}
+	
+	@Test
+	public void testeBuscarTodosTelefonesComID() {
+		DaoGeneric daoGeneric = new DaoGeneric();
+
+		UsuarioPessoa pessoa = (UsuarioPessoa) daoGeneric.pesquisar(15L, UsuarioPessoa.class);
+		for (UsuarioTelefone telefone : pessoa.getUsuarioTelefones()) {
+			System.out.println("-----------------------");
+			System.out.println(telefone.getNumero());
+			System.out.println(telefone.getTipo());
+			System.out.println(telefone.getUsuarioPessoa().getNome());
+		}
+
+	}
+	
+	@Test
+	public void testeListarTelefones() {
+		DaoGeneric daoGeneric = new DaoGeneric();
+
+		List<UsuarioTelefone> lista = daoGeneric.buscarTodos(UsuarioTelefone.class);
+		for (UsuarioTelefone usuarioTelefone : lista) {
+			System.out.println(usuarioTelefone.getUsuarioPessoa().getNome());
+			System.out.println(usuarioTelefone.getNumero());
+			System.out.println(usuarioTelefone.getTipo());
+			System.out.println("");
+		}
+
+	}
+
 
 
 }
